@@ -1,5 +1,6 @@
 import hashlib
 from datetime import datetime, timezone
+from unittest.mock import patch
 import pytest
 from agentproof.core.crypto import generate_keypair, sign_payload
 
@@ -36,3 +37,19 @@ async def test_verify_registered_agent(client):
 async def test_verify_unknown_did(client):
     response = await client.get("/agents/did:key:z6MkNonexistent/verify")
     assert response.status_code == 404
+
+
+@pytest.mark.asyncio
+async def test_verify_expired_credential(client):
+    """verify returns valid=false when the credential JWT has expired."""
+    private_key, public_key = generate_keypair()
+    data = await _register_agent(client, private_key, public_key)
+    did = data["did"]
+    # Simulate a future time well past any reasonable credential TTL
+    far_future = 9_999_999_999.0
+    with patch("agentproof.api.routes.verify.time.time", return_value=far_future):
+        response = await client.get(f"/agents/{did}/verify")
+    assert response.status_code == 200
+    result = response.json()
+    assert result["valid"] is False
+    assert result["revoked"] is False

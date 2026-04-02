@@ -1,3 +1,4 @@
+import time
 import jwt as pyjwt
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
@@ -25,6 +26,7 @@ async def verify_agent(did: str, session: AsyncSession = Depends(get_session)):
     if agent is None:
         raise HTTPException(status_code=404, detail="Agent not found")
     credential_expires = None
+    credential_expired = False
     if agent.credential_jwt:
         try:
             claims = pyjwt.decode(agent.credential_jwt, options={"verify_signature": False})
@@ -32,9 +34,10 @@ async def verify_agent(did: str, session: AsyncSession = Depends(get_session)):
             if exp:
                 from datetime import datetime, timezone
                 credential_expires = datetime.fromtimestamp(exp, tz=timezone.utc).isoformat()
+                credential_expired = exp < time.time()
         except pyjwt.InvalidTokenError:
-            pass
-    valid = not agent.revoked and agent.credential_jwt is not None
+            credential_expired = True
+    valid = not agent.revoked and agent.credential_jwt is not None and not credential_expired
     return VerifyResponse(
         did=agent.did,
         display_name=agent.display_name,

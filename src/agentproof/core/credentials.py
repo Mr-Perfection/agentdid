@@ -45,5 +45,5 @@ def verify_credential(token: str, issuer_public_key: bytes) -> dict | None:
         pub_key = Ed25519PublicKey.from_public_bytes(issuer_public_key)
         claims = jwt.decode(token, pub_key, algorithms=["EdDSA"])
         return claims
-    except (jwt.InvalidTokenError, jwt.ExpiredSignatureError, Exception):
+    except (jwt.InvalidTokenError, jwt.ExpiredSignatureError, ValueError, TypeError):
         return None

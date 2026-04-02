@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from agentproof.api.routes.register import router as register_router
 from agentproof.api.routes.verify import router as verify_router
 from agentproof.api.routes.credential import router as credential_router
+from agentproof.api.routes.email import router as email_router
 
 def create_app() -> FastAPI:
     app = FastAPI(
@@ -17,4 +18,5 @@ def create_app() -> FastAPI:
     app.include_router(register_router, prefix="/v1")
     app.include_router(verify_router, prefix="/v1")
     app.include_router(credential_router, prefix="/v1")
+    app.include_router(email_router, prefix="/v1")
     return app

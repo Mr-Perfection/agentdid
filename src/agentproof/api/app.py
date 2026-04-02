@@ -3,6 +3,8 @@ from agentproof.api.routes.register import router as register_router
 from agentproof.api.routes.verify import router as verify_router
 from agentproof.api.routes.credential import router as credential_router
 from agentproof.api.routes.email import router as email_router
+from agentproof.api.routes.manage import router as manage_router
+from agentproof.api.routes.well_known import router as well_known_router
 
 def create_app() -> FastAPI:
     app = FastAPI(
@@ -15,8 +17,10 @@ def create_app() -> FastAPI:
     async def health_check():
         return {"status": "ok"}
 
+    app.include_router(well_known_router)  # NO prefix - root level
     app.include_router(register_router, prefix="/v1")
     app.include_router(verify_router, prefix="/v1")
     app.include_router(credential_router, prefix="/v1")
     app.include_router(email_router, prefix="/v1")
+    app.include_router(manage_router, prefix="/v1")
     return app

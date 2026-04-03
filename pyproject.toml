@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "agentproof"
+name = "agentdid"
 version = "0.1.0"
 description = "Cryptographic proof that a human stands behind an AI agent."
 readme = "README.md"

@@ -1,4 +1,4 @@
-app = "agentproof-api"
+app = "agentdid-api"
 primary_region = "sjc"
 
 [build]

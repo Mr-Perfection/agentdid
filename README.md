@@ -84,7 +84,7 @@ The issuer's DID document is served at `/.well-known/did.json` so any party can 
 
 ```bash
 git clone https://github.com/Mr-Perfection/agentdid.git
-cd agentproof
+cd agentdid
 pip install -e ".[dev]"
 pytest
 ```

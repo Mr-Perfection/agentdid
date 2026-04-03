@@ -46,8 +46,8 @@ After registration, `~/.agentdid/` contains your private key and credential JWT.
 | `agentdid verify-email` | Send email verification for your agent |
 | `agentdid confirm-email` | Confirm email with verification code |
 | `agentdid revoke` | Revoke your agent's credential |
-| `agentdid credential jwt` | Display your agent's credential JWT |
-| `agentdid credential agent-card` | Generate an agent card with embedded proof |
+| `agentdid credential --format jwt` | Display your agent's credential JWT |
+| `agentdid credential --format agent-card` | Generate an agent card with embedded proof |
 
 **Global options:**
 

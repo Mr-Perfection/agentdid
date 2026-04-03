@@ -4,7 +4,7 @@ Cryptographic identity for AI agents. Prove a human stands behind the bot.
 
 [![PyPI version](https://img.shields.io/pypi/v/agentdid)](https://pypi.org/project/agentdid/)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](LICENSE)
-[![Tests](https://img.shields.io/github/actions/workflow/status/Mr-Perfection/agentproof/ci.yml?label=tests)](https://github.com/Mr-Perfection/agentproof/actions)
+[![Tests](https://img.shields.io/github/actions/workflow/status/Mr-Perfection/agentdid/ci.yml?label=tests)](https://github.com/Mr-Perfection/agentdid/actions)
 
 ---
 
@@ -83,7 +83,7 @@ The issuer's DID document is served at `/.well-known/did.json` so any party can 
 ## Development
 
 ```bash
-git clone https://github.com/Mr-Perfection/agentproof.git
+git clone https://github.com/Mr-Perfection/agentdid.git
 cd agentproof
 pip install -e ".[dev]"
 pytest

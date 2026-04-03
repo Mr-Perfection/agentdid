@@ -2,9 +2,9 @@ import time
 
 import jwt
 
-from agentproof.core.credentials import issue_credential, verify_credential
-from agentproof.core.crypto import generate_keypair
-from agentproof.core.did import pubkey_to_did
+from agentdid.core.credentials import issue_credential, verify_credential
+from agentdid.core.crypto import generate_keypair
+from agentdid.core.did import pubkey_to_did
 
 
 def test_issue_l0_credential():
@@ -14,7 +14,7 @@ def test_issue_l0_credential():
 
     token = issue_credential(
         issuer_private_key=issuer_private,
-        issuer_did="did:web:agentproof.dev",
+        issuer_did="did:web:rureal.ai",
         agent_did=agent_did,
         verification_level=0,
         email_verified=False,
@@ -23,7 +23,7 @@ def test_issue_l0_credential():
 
     assert isinstance(token, str)
     claims = jwt.decode(token, options={"verify_signature": False})
-    assert claims["iss"] == "did:web:agentproof.dev"
+    assert claims["iss"] == "did:web:rureal.ai"
     assert claims["sub"] == agent_did
     assert claims["vc"]["credentialSubject"]["verificationLevel"] == 0
     assert claims["vc"]["credentialSubject"]["emailVerified"] is False
@@ -38,7 +38,7 @@ def test_issue_l1_credential():
 
     token = issue_credential(
         issuer_private_key=issuer_private,
-        issuer_did="did:web:agentproof.dev",
+        issuer_did="did:web:rureal.ai",
         agent_did=agent_did,
         verification_level=1,
         email_verified=True,
@@ -57,7 +57,7 @@ def test_verify_credential_valid():
 
     token = issue_credential(
         issuer_private_key=issuer_private,
-        issuer_did="did:web:agentproof.dev",
+        issuer_did="did:web:rureal.ai",
         agent_did=agent_did,
         verification_level=0,
         email_verified=False,
@@ -77,7 +77,7 @@ def test_verify_credential_wrong_key():
 
     token = issue_credential(
         issuer_private_key=issuer_private,
-        issuer_did="did:web:agentproof.dev",
+        issuer_did="did:web:rureal.ai",
         agent_did=agent_did,
         verification_level=0,
         email_verified=False,
@@ -95,7 +95,7 @@ def test_verify_credential_expired():
 
     token = issue_credential(
         issuer_private_key=issuer_private,
-        issuer_did="did:web:agentproof.dev",
+        issuer_did="did:web:rureal.ai",
         agent_did=agent_did,
         verification_level=0,
         email_verified=False,

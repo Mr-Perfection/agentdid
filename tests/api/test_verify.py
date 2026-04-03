@@ -2,7 +2,7 @@ import hashlib
 from datetime import datetime, timezone
 from unittest.mock import patch
 import pytest
-from agentproof.core.crypto import generate_keypair, sign_payload
+from agentdid.core.crypto import generate_keypair, sign_payload
 
 async def _register_agent(client, private_key, public_key, display_name="test-agent"):
     timestamp = datetime.now(timezone.utc).isoformat()
@@ -47,7 +47,7 @@ async def test_verify_expired_credential(client):
     did = data["did"]
     # Simulate a future time well past any reasonable credential TTL
     far_future = 9_999_999_999.0
-    with patch("agentproof.api.routes.verify.time.time", return_value=far_future):
+    with patch("agentdid.api.routes.verify.time.time", return_value=far_future):
         response = await client.get(f"/agents/{did}/verify")
     assert response.status_code == 200
     result = response.json()

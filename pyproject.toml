@@ -35,10 +35,10 @@ dev = [
 ]
 
 [project.scripts]
-agentproof = "agentproof.cli.main:cli"
+agentdid = "agentdid.cli.main:cli"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/agentproof"]
+packages = ["src/agentdid"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

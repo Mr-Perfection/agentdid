@@ -2,7 +2,7 @@ import hashlib
 from datetime import datetime, timezone
 from unittest.mock import AsyncMock, patch
 import pytest
-from agentproof.core.crypto import generate_keypair, sign_payload
+from agentdid.core.crypto import generate_keypair, sign_payload
 
 async def _register_agent(client, private_key, public_key, email="test@example.com"):
     timestamp = datetime.now(timezone.utc).isoformat()
@@ -28,7 +28,7 @@ async def test_verify_email_sends_code(client):
     data = await _register_agent(client, private_key, public_key)
     did = data["did"]
     timestamp, signature = _sign_mutation(private_key, did, "verify-email")
-    with patch("agentproof.api.routes.email.send_verification_email", new_callable=AsyncMock) as mock_send:
+    with patch("agentdid.api.routes.email.send_verification_email", new_callable=AsyncMock) as mock_send:
         mock_send.return_value = True
         response = await client.post(f"/agents/{did}/verify-email", json={
             "timestamp": timestamp,
@@ -67,7 +67,7 @@ async def test_confirm_email_upgrades_to_l1(client, db_session):
     async def fake_send(email, code):
         captured_code["code"] = code
         return True
-    with patch("agentproof.api.routes.email.send_verification_email", side_effect=fake_send):
+    with patch("agentdid.api.routes.email.send_verification_email", side_effect=fake_send):
         await client.post(f"/agents/{did}/verify-email", json={
             "timestamp": ts1,
             "signature": sig1.hex(),
@@ -89,7 +89,7 @@ async def test_confirm_email_wrong_code(client):
     data = await _register_agent(client, private_key, public_key)
     did = data["did"]
     ts1, sig1 = _sign_mutation(private_key, did, "verify-email")
-    with patch("agentproof.api.routes.email.send_verification_email", new_callable=AsyncMock) as mock_send:
+    with patch("agentdid.api.routes.email.send_verification_email", new_callable=AsyncMock) as mock_send:
         mock_send.return_value = True
         await client.post(f"/agents/{did}/verify-email", json={
             "timestamp": ts1,

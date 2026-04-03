@@ -8,7 +8,7 @@ async def test_well_known_did_json(app, issuer_keypair):
         response = await client.get("/.well-known/did.json")
     assert response.status_code == 200
     data = response.json()
-    assert data["id"] == "did:web:agentproof.dev"
+    assert data["id"] == "did:web:rureal.ai"
     assert "verificationMethod" in data
     assert len(data["verificationMethod"]) == 1
     method = data["verificationMethod"][0]

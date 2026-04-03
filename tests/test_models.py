@@ -1,6 +1,6 @@
 import uuid
 from datetime import datetime, timezone
-from agentproof.db.models import Agent
+from agentdid.db.models import Agent
 
 def test_agent_model_instantiation():
     agent = Agent(

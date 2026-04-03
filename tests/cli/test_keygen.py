@@ -1,4 +1,4 @@
-from agentproof.cli.main import cli
+from agentdid.cli.main import cli
 
 def test_keygen_creates_files(runner, tmp_path):
     result = runner.invoke(cli, ["--config-dir", str(tmp_path), "keygen"])

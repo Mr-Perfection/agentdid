@@ -1,7 +1,7 @@
 import hashlib
 from datetime import datetime, timezone
 
-from agentproof.core.crypto import generate_keypair, sign_payload, verify_signature
+from agentdid.core.crypto import generate_keypair, sign_payload, verify_signature
 
 
 def test_generate_keypair_returns_32_byte_keys():

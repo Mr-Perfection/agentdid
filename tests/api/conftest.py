@@ -2,10 +2,10 @@ import pytest
 from httpx import ASGITransport, AsyncClient
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 
-from agentproof.api.app import create_app
-from agentproof.core.crypto import generate_keypair
-from agentproof.db.models import Base
-from agentproof.db.session import get_session
+from agentdid.api.app import create_app
+from agentdid.core.crypto import generate_keypair
+from agentdid.db.models import Base
+from agentdid.db.session import get_session
 
 
 @pytest.fixture

@@ -1,6 +1,6 @@
 from unittest.mock import patch, MagicMock
-from agentproof.cli.main import cli
-from agentproof.core.crypto import generate_keypair
+from agentdid.cli.main import cli
+from agentdid.core.crypto import generate_keypair
 
 def _setup_keys(tmp_path):
     private_key, public_key = generate_keypair()
@@ -13,7 +13,7 @@ def test_register_success(runner, tmp_path):
     mock_response = MagicMock()
     mock_response.status_code = 200
     mock_response.json.return_value = {"did": "did:key:z6MkTest", "verification_level": 0, "credential_jwt": "eyJ..."}
-    with patch("agentproof.cli.register.httpx.post", return_value=mock_response):
+    with patch("agentdid.cli.register.httpx.post", return_value=mock_response):
         result = runner.invoke(cli, ["--config-dir", str(tmp_path), "register", "--name", "my-agent"])
     assert result.exit_code == 0
     assert "did:key:z6MkTest" in result.output

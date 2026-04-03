@@ -1,6 +1,6 @@
 import json
 import tomli_w
-from agentproof.cli.main import cli
+from agentdid.cli.main import cli
 
 def test_credential_jwt(runner, tmp_path):
     (tmp_path / "credential.jwt").write_text("eyJhbGciOiJFZERTQSJ9.test.sig")
@@ -18,4 +18,4 @@ def test_credential_agent_card(runner, tmp_path):
     assert result.exit_code == 0
     data = json.loads(result.output)
     assert data["id"] == "did:key:z6MkTest"
-    assert "agentproof" in data["verification"]["issuer"].lower()
+    assert "rureal" in data["verification"]["issuer"].lower()

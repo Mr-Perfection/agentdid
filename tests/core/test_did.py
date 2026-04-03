@@ -1,5 +1,5 @@
-from agentproof.core.crypto import generate_keypair
-from agentproof.core.did import pubkey_to_did, did_to_pubkey
+from agentdid.core.crypto import generate_keypair
+from agentdid.core.did import pubkey_to_did, did_to_pubkey
 
 
 def test_pubkey_to_did_starts_with_did_key_z6Mk():

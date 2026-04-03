@@ -2,7 +2,7 @@ import hashlib
 import json
 from datetime import datetime, timezone
 import pytest
-from agentproof.core.crypto import generate_keypair, sign_payload
+from agentdid.core.crypto import generate_keypair, sign_payload
 
 async def _register_agent(client, private_key, public_key):
     timestamp = datetime.now(timezone.utc).isoformat()

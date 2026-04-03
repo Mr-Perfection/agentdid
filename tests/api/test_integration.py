@@ -2,7 +2,7 @@ import hashlib
 from datetime import datetime, timezone
 from unittest.mock import AsyncMock, patch
 import pytest
-from agentproof.core.crypto import generate_keypair, sign_payload
+from agentdid.core.crypto import generate_keypair, sign_payload
 
 def _sign_mutation(private_key, did, action):
     timestamp = datetime.now(timezone.utc).isoformat()
@@ -44,7 +44,7 @@ async def test_full_l0_to_l1_flow(client):
     async def fake_send(email, code):
         captured_code["code"] = code
         return True
-    with patch("agentproof.api.routes.email.send_verification_email", side_effect=fake_send):
+    with patch("agentdid.api.routes.email.send_verification_email", side_effect=fake_send):
         email_resp = await client.post(f"/agents/{did}/verify-email", json={
             "timestamp": ts1, "signature": sig1.hex(),
         })

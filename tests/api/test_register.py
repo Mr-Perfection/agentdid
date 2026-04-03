@@ -1,7 +1,7 @@
 import hashlib
 from datetime import datetime, timezone
 import pytest
-from agentproof.core.crypto import generate_keypair, sign_payload
+from agentdid.core.crypto import generate_keypair, sign_payload
 
 @pytest.mark.asyncio
 async def test_register_agent_success(client):

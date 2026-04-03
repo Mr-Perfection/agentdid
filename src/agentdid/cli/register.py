@@ -4,21 +4,21 @@ from datetime import datetime, timezone
 import click
 import httpx
 import tomli_w
-from agentproof.cli.main import cli
-from agentproof.core.crypto import sign_payload
+from agentdid.cli.main import cli
+from agentdid.core.crypto import sign_payload
 
 @cli.command()
 @click.option("--name", default=None, help="Display name for the agent")
 @click.option("--email", default=None, help="Owner email for L1 verification")
 @click.pass_context
 def register(ctx, name, email):
-    """Register your agent with AgentProof."""
+    """Register your agent with agentdid."""
     config_dir = ctx.obj["config_dir"]
     api_url = ctx.obj["api_url"]
     key_path = os.path.join(config_dir, "agent.key")
     pub_path = os.path.join(config_dir, "agent.pub")
     if not os.path.exists(key_path) or not os.path.exists(pub_path):
-        click.echo("No keypair found. Run `agentproof keygen` first.")
+        click.echo("No keypair found. Run `agentdid keygen` first.")
         ctx.exit(1)
         return
     private_key = open(key_path, "rb").read()

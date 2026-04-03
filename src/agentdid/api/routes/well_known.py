@@ -1,6 +1,6 @@
 import base58
 from fastapi import APIRouter, Request
-from agentproof.core.config import settings
+from agentdid.core.config import settings
 
 router = APIRouter()
 _ED25519_MULTICODEC_PREFIX = b"\xed\x01"

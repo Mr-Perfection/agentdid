@@ -6,11 +6,11 @@ from fastapi import APIRouter, Depends, HTTPException, Request
 from pydantic import BaseModel
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
-from agentproof.api.deps import verify_agent_signature, verify_timestamp
-from agentproof.core.config import settings
-from agentproof.core.credentials import issue_credential
-from agentproof.db.models import Agent
-from agentproof.db.session import get_session
+from agentdid.api.deps import verify_agent_signature, verify_timestamp
+from agentdid.core.config import settings
+from agentdid.core.credentials import issue_credential
+from agentdid.db.models import Agent
+from agentdid.db.session import get_session
 
 router = APIRouter()
 
@@ -32,7 +32,7 @@ async def send_verification_email(email: str, code: str) -> bool:
     resend.Emails.send({
         "from": settings.resend_from_email,
         "to": [email],
-        "subject": "AgentProof Email Verification",
+        "subject": "AgentDID Email Verification",
         "text": f"Your verification code is: {code}\n\nThis code expires in 10 minutes.",
     })
     return True

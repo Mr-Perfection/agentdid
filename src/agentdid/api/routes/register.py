@@ -3,13 +3,13 @@ from fastapi import APIRouter, Depends, HTTPException, Request
 from pydantic import BaseModel
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
-from agentproof.core.config import settings
-from agentproof.core.credentials import issue_credential
-from agentproof.core.crypto import verify_signature
-from agentproof.core.did import pubkey_to_did
-from agentproof.db.models import Agent
-from agentproof.db.session import get_session
-from agentproof.api.deps import verify_timestamp
+from agentdid.core.config import settings
+from agentdid.core.credentials import issue_credential
+from agentdid.core.crypto import verify_signature
+from agentdid.core.did import pubkey_to_did
+from agentdid.db.models import Agent
+from agentdid.db.session import get_session
+from agentdid.api.deps import verify_timestamp
 
 router = APIRouter()
 

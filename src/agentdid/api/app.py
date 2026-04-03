@@ -1,13 +1,13 @@
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from nacl.signing import SigningKey
-from agentproof.api.routes.register import router as register_router
-from agentproof.api.routes.verify import router as verify_router
-from agentproof.api.routes.credential import router as credential_router
-from agentproof.api.routes.email import router as email_router
-from agentproof.api.routes.manage import router as manage_router
-from agentproof.api.routes.well_known import router as well_known_router
-from agentproof.core.config import Settings
+from agentdid.api.routes.register import router as register_router
+from agentdid.api.routes.verify import router as verify_router
+from agentdid.api.routes.credential import router as credential_router
+from agentdid.api.routes.email import router as email_router
+from agentdid.api.routes.manage import router as manage_router
+from agentdid.api.routes.well_known import router as well_known_router
+from agentdid.core.config import Settings
 
 
 @asynccontextmanager
@@ -24,7 +24,7 @@ async def lifespan(app: FastAPI):
 
 def create_app() -> FastAPI:
     app = FastAPI(
-        title="AgentProof",
+        title="agentdid",
         description="Cryptographic proof that a human stands behind an AI agent.",
         version="0.1.0",
         lifespan=lifespan,

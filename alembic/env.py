@@ -3,8 +3,8 @@ from logging.config import fileConfig
 from alembic import context
 from sqlalchemy import pool
 from sqlalchemy.ext.asyncio import async_engine_from_config
-from agentproof.core.config import settings
-from agentproof.db.models import Base
+from agentdid.core.config import settings
+from agentdid.db.models import Base
 
 config = context.config
 config.set_main_option("sqlalchemy.url", settings.database_url)

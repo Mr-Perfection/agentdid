@@ -1,6 +1,6 @@
 import click
 import httpx
-from agentproof.cli.main import cli
+from agentdid.cli.main import cli
 
 @cli.command()
 @click.argument("did")

@@ -4,8 +4,8 @@ from datetime import datetime, timezone
 import click
 import httpx
 import tomllib
-from agentproof.cli.main import cli
-from agentproof.core.crypto import sign_payload
+from agentdid.cli.main import cli
+from agentdid.core.crypto import sign_payload
 
 @cli.command()
 @click.pass_context
@@ -15,7 +15,7 @@ def revoke(ctx):
     key_path = os.path.join(config_dir, "agent.key")
     config_path = os.path.join(config_dir, "config.toml")
     if not os.path.exists(key_path) or not os.path.exists(config_path):
-        click.echo("No registered agent found. Run `agentproof register` first.")
+        click.echo("No registered agent found. Run `agentdid register` first.")
         ctx.exit(1)
         return
     private_key = open(key_path, "rb").read()

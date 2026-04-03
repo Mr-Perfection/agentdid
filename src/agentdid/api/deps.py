@@ -1,8 +1,8 @@
 import hashlib
 from datetime import datetime, timezone
 from fastapi import HTTPException
-from agentproof.core.config import settings
-from agentproof.core.crypto import verify_signature
+from agentdid.core.config import settings
+from agentdid.core.crypto import verify_signature
 
 def verify_timestamp(timestamp: str) -> datetime:
     try:

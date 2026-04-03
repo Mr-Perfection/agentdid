@@ -2,9 +2,9 @@ from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
-from agentproof.api.deps import verify_agent_signature, verify_timestamp
-from agentproof.db.models import Agent
-from agentproof.db.session import get_session
+from agentdid.api.deps import verify_agent_signature, verify_timestamp
+from agentdid.db.models import Agent
+from agentdid.db.session import get_session
 
 router = APIRouter()
 

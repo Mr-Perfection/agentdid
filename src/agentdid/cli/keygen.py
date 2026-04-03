@@ -1,8 +1,8 @@
 import os
 import stat
 import click
-from agentproof.cli.main import cli
-from agentproof.core.crypto import generate_keypair
+from agentdid.cli.main import cli
+from agentdid.core.crypto import generate_keypair
 
 @cli.command()
 @click.option("--force", is_flag=True, help="Overwrite existing keys")
